@@ -1,0 +1,54 @@
+---
+  title: "ggplot pt 1 assignment"
+author: "Amanda Mae Woodward"
+date: "2026-10-29"
+output: html_document
+---
+  1. open the starwars dataset in tidyverse
+
+
+library(tidyverse)
+View(starwars)
+# 2. create a graph showing the frequency of eye colors in the dataset. 
+ggplot(starwars, aes(eye_color))+geom_bar()
+
+#3. Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc. 
+ggplot(starwars, aes(eye_color))+geom_bar(fill="lightblue", color="black") + theme_classic()+labs(x="Eye Color", y="Number of Charecters")
+
+
+#4. Create a graph displaying information about character's height in each homeworld. 
+
+
+ggplot(starwars, aes(homeworld, height))+geom_boxplot()
+
+
+#5. Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc.
+ggplot(starwars, aes(homeworld, height, fill=homeworld)) +geom_boxplot()+ theme(legend.position="none")+ labs(x="homeworld", y="height in CM")
+
+#6. Create a graph of character's height by mass. 
+
+ggplot(starwars, aes(height, mass))+geom_boxplot()
+
+7.Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc.
+
+
+ggplot(starwars, aes(height, mass))+geom_boxplot(color="pink") + theme_classic()+labs(x="height", y="mass")
+
+8. Add gender as a third variable to your graph of height by mass. 
+ggplot(starwars, aes(height, mass, color=gender))+geom_boxplot()
+9. Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc.
+gplot(starwars, aes(height, mass, color=gender))+geom_boxplot()+theme_classic()+theme(legend.position = "top")+ labs(x="height", y="mass")
+
+chat convo
+
+
+what is wrong with my codeI keep getting error code Error: unexpected symbol in "7.Customize"
+> 4. Create a graph displaying information about character's height in each homeworld. 
+Error: unexpected symbol in "4. Create"
+That error happens because you're typing the assignment questions into the R Console, and R is trying to interpret them as code.
+
+For example, this is not R code:
+  
+  4. Create a graph displaying information about character's height in each homeworld.
+Here's how to fix it
+Option 1: Put a # before the question
