@@ -1,0 +1,81 @@
+---
+title: "Quiz 3"
+author: "Amanda Mae Woodward"
+date: "2025-10-30"
+output: html_document
+---
+1. Load the spotify dataset (available in github repository).
+```{r}
+library(tidyverse)
+SpotifyData <- spotifyDat_Fall26
+SpotifyData
+```
+
+
+```{r}
+
+```
+
+2. Create a bar graph of the artist column`
+(Hint: use theme(axis.text.x = element_text(angle = 90)) to rotate the x axis).
+```
+
+
+
+```{r}
+ggplot(SpotifyData, aes(x= artist))+geom_bar()+theme(axis.text.x = element_text(angle = 90))
+
+```
+
+3. Add genre as a third variable in your graph.
+```{r}
+ggplot(SpotifyData, aes(x= artist, fill=genre))+geom_bar()+theme(axis.text.x = element_text(angle = 90))
+```
+
+4. Use color brewer to add color to your graph in 3. 
+```{r}
+ggplot(SpotifyData, aes(x= artist, fill=genre))+geom_bar()+scale_fill_brewer(palette = "Dark2")+theme(axis.text.x = element_text(angle = 90))
+```
+
+5. Place the legend for the graph you made in 3 on the bottom of the graph. 
+```{r}
+ggplot(SpotifyData, aes(x= artist, fill=genre))+geom_bar()+scale_fill_brewer(palette = "Dark2")+theme(axis.text.x = element_text(angle = 90),legend.position= "bottom")
+```
+
+As you probably recognized, the graph you made is really hard to read.
+
+6. Separate the genre column into multiple columns (e.g. so each genre listed is in a unique column)
+```{r}
+SpotifySPOT<- separate(SpotifyData, genre, into=c("genre1", "genre2", "genre3", "genre4"), sep =",")
+```
+
+7. Use these genre columns to create a dataset in long format. 
+```{r}
+SpotLong<-pivot_longer(SpotifySPOT,cols = c("genre1", "genre2", "genre3", "genre4"), names_to="genre_num",values_to="genre",values_drop_na=TRUE)
+```
+
+8.use facet wrap to make graphs of artist by genre 
+```{r}
+ggplot(SpotLong,aes(x = artist))+geom_bar()+facet_wrap(~genre)+theme(axis.text.x = element_text(angle = 90))
+
+```
+
+9. Create a graph that includes the variables tempo and dancability. 
+```{r}
+ggplot(SpotLong, aes(x=tempo, y=danceability))+geom_point()
+```
+
+10. Add popularity as a third variable. 
+```{r}
+ggplot(SpotLong, aes(x=tempo, y=danceability, color=popularity))+geom_point()
+```
+
+11. Use viridis as a color in your graph from #10
+```{r}
+library(viridis)
+```
+
+```{r}
+ggplot(SpotLong, aes(x=tempo, y=danceability, color=popularity))+geom_point()+scale_color_viridis()
+
+```
