@@ -1,0 +1,80 @@
+---
+title: "Statistics in R Assignment"
+author: "Amanda Mae Woodward"
+date: "2026-11-05"
+output: html_document
+---
+
+1. Open the diamonds dataset from ggplot2.   
+```{r}
+library(ggplot2)
+data(diamonds)
+View(diamonds)
+```
+
+2. Run a correlation between the x and y variables. What do you notice? 
+```{r}
+cor(diamonds$x, diamonds$y)
+```
+
+3. What is the correlation between price and carat?
+```{r}
+cor(diamonds$price, diamonds$carat)
+```
+
+4. Create a linear model predicting price from table. What is the coefficient for table? 
+```{r}
+lm1<-lm(price~table, data = diamonds)
+summary (lm1)
+```
+- 226.984
+
+5. Run a regression and an Anova predicting price from color. What do you notice about the two types of output? 
+```{r}
+lm2<-lm(price~color, data = diamonds)
+summary(lm2)
+```
+
+```{r}
+aov1<-aov(price ~ color, data=diamonds)
+summary(aov1)
+```
+
+6. Run a t test to determine if "D" color diamonds are more expensive than "E" color diamonds. 
+```{r}
+library(tidyverse)
+```
+
+```{r}
+DEdiamonds<-diamonds|>filter(color=="D" | color== "E")
+t.test(price~color, data = DEdiamonds,alternative="greater")
+```
+t.test()
+
+7. Open the warpbreaks dataset. What test would you use to determine the correlation between wool type and breaks?
+```{r}
+data("warpbreaks")
+view(warpbreaks)
+```
+
+```{r
+```
+
+
+8. What is the correlation between wool type and breaks? 
+```{r}
+install.packages("ltm")
+library(ltm)
+```
+
+```{r}
+data("warpbreaks")
+biserial.cor(warpbreaks$breaks, warpbreaks$wool, level = 1)
+```
+
+
+9. A student has a 35 question, multiple choice test. Each question has 4 choices. If they answered 17 questions correctly, did their responses differ from chance?  
+```{r}
+binom.test(17, 35, p=.25)
+```
+
