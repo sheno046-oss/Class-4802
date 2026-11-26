@@ -1,0 +1,168 @@
+---
+  title: "Foundations in R Assignment pt 1"
+author: "Amanda Mae Woodward"
+date: "2026-09-24"
+output: html_document
+---
+  
+  For your first R Assignment, complete the questions below. Remember, weekly assignments are graded based on attempts and accuracy, so it's ok if you don't get everything immediately. Please submit your answers by 1) updating this file in your GitHub repository and 2) uploading a .html file of the assignment to this repository. Please submit a link to the repository on Canvas. 
+
+# Variables, Vectors, Lists, and Data frames
+
+1. Create a vector called score that starts at 1 and contains every 9th number between 1 and 100. 
+```{r}
+score <- seq (1, 100, 9)
+```
+
+
+2. Create a list called participants that contains the participants 1 - 12. 
+```{r}
+ppts<- c("p1", "p2", "p3", "p4","p5", "p6", "p7", "p8", "p9", "p10", "p11", "p12")
+```
+
+
+
+3. Create a list called condition that alternates the words control and experimental six times, for a total of 12 words.
+```{r}
+condition<- rep(c("control" , "experimental") , 6) '
+```
+
+
+4. Create a dataframe from the variables in #1-3. 
+```{r}
+
+PptsData<-cbind.data.frame(score, ppts, condition)
+chickwts
+```
+
+
+5. Take the mean of the score column from your dataframe.
+```{r}
+mean(PptsData$score)
+```
+
+
+# Using data frames 
+
+6. Open the penguins dataframe. Print the dataframe.  
+penguins
+```{r}
+print(penguins)
+```
+
+print(penguins)
+
+7. Create a subset of data for Adelie penguins. 
+
+```{r}
+Adelie<-subset(penguins , species=="Adelie")
+```
+
+
+8. Summarize this subset of data. 
+```{r}
+summary(Adelie)
+```
+
+summary(Adelie)
+8. Create a dataframe that contains penguins with a bill length greater than or equal to the average bill length. 
+```{r}
+LongishBill <- (penguins$bill_length_mm >= mean(penguins$bill_length_mm, na.rm = TRUE))
+LongishBill
+```
+
+10. How many penguins are in this subset? 
+```{r}
+ nrow(Adelie)
+  152
+  # More dataset us
+ 
+  library(tidyverse)
+```
+
+ nrow(Adelie)
+  152
+  # More dataset us
+ 
+  library(tidyverse)
+
+10. Load the tidyverse library if you haven't already done so.
+```{r}
+  library(tidyverse)
+```
+
+  library(tidyverse)
+11. Load the diamonds dataset.
+
+  
+```{r}
+diamonds
+```
+ 
+  
+12. Create a new dataframe that has diamonds greater than 1 carat and an ideal cut. 
+```{r}
+data("diamonds")
+load(diamonds)
+head(diamonds)
+IdealCut1 <- subset(diamonds, carat > 1 & cut == "Ideal")
+```
+
+asked chat why i got 0, I decided to rename it bc i had 0 of 10 variable. I think one of my spaces was off and it worked
+13. Find the mean and standard deviation of price for this new dataset. 
+```{r}
+mean(IdealCut1$price) 8674.227
+sd(IdealCut1$price)  3817.028
+```
+
+
+14. Create another new dataframe from the original diamonds
+dataset that includes all diamonds with a price between $2500 and $5000. 
+```{r}
+PriceRange<- subset(diamonds, price>= 2500 & price<=5000)
+```
+```{r}
+```
+
+
+15.Which color occurs most in this new subset?
+```{r}
+  summary(PriceRange$color)
+
+```
+>   summary(PriceRange$color)
+D    E    F    G    H    I    J 
+1518 2184 2221 1950 1932 1225  656 
+  
+  
+  CHAT CONVO
+  
+  I keep getting NaN from this command, what’s wrong w it?
+    Your mean() command is fine. The problem is that IdealCut has 0 rows:
+    
+    # A tibble: 0 x 10
+    
+    So R has no prices to average, which is why:
+    
+    mean(IdealCut$price)
+  
+  returns NaN.
+  
+  For question 12, recreate the subset like this:
+    
+    IdealCut <- diamonds %>%
+    filter(carat > 1, cut == "Ideal")
+  
+  Then check:
+    
+    nrow(IdealCut)
+  
+  and calculate:
+    
+    mean(IdealCut$price)
+  sd(IdealCut$price)
+  
+  The important part is cut == "Ideal" — capital I, and == for comparison.
+  
+  I got 0
+
